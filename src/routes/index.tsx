@@ -25,16 +25,18 @@ import {
 import { useEffect, useRef, useState } from "react";
 
 import horizonPoster from "@/assets/horizon-poster.jpg";
-import trailerAsset from "@/assets/beyond-the-horizon.mp4.asset.json";
 import { Button } from "@/components/ui/button";
+
+const TRAILER_URL =
+  "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev/trailers/80f921c5-2b36-4daa-92fd-1c88f2452c21-KIMOTE_OFFICIAL_TRAILER.mp4";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Beyond the Horizon — Trailer Player" },
-      { name: "description", content: "Watch the cinematic trailer for Beyond the Horizon." },
-      { property: "og:title", content: "Beyond the Horizon — Trailer Player" },
-      { property: "og:description", content: "Watch the cinematic trailer for Beyond the Horizon." },
+      { title: "Kimote — Official Trailer" },
+      { name: "description", content: "Watch the official trailer for Kimote." },
+      { property: "og:title", content: "Kimote — Official Trailer" },
+      { property: "og:description", content: "Watch the official trailer for Kimote." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -134,12 +136,12 @@ function Index() {
     <main className="flex min-h-screen flex-col items-center justify-start bg-player-page sm:justify-center sm:p-8">
       <section
         ref={playerRef}
-        aria-label="Beyond the Horizon trailer"
+        aria-label="Kimote official trailer"
         className="relative h-[68svh] w-full overflow-hidden rounded-none bg-player-surface shadow-2xl sm:aspect-video sm:h-auto sm:max-w-[1200px] sm:rounded-3xl"
       >
         <video
           ref={videoRef}
-          src={trailerAsset.url}
+          src={TRAILER_URL}
           poster={horizonPoster}
           autoPlay
           muted={muted}
@@ -151,7 +153,7 @@ function Index() {
             setEnded(true);
           }}
           onClick={togglePlayback}
-          aria-label="Beyond the Horizon video trailer"
+          aria-label="Kimote official trailer video"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-player-surface/40 via-transparent to-player-surface/60" />
@@ -161,7 +163,7 @@ function Index() {
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-6 bg-player-surface/85 px-6 text-center backdrop-blur-sm">
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-player-soft">Up next</p>
-              <h2 className="mt-2 text-2xl font-semibold text-player-ink sm:text-3xl">Beyond the Horizon</h2>
+              <h2 className="mt-2 text-2xl font-semibold text-player-ink sm:text-3xl">Kimote</h2>
             </div>
             <a
               href="https://hassanmageye.com/films/kimote"
@@ -197,7 +199,7 @@ function Index() {
               <ChevronDown />
             </Button>
             <div className="min-w-0 pt-1.5">
-              <p className="truncate text-sm font-medium text-player-ink sm:text-base">Beyond the Horizon</p>
+              <p className="truncate text-sm font-medium text-player-ink sm:text-base">Kimote — Official Trailer</p>
               <div className="mt-2 h-1 w-24 rounded-full bg-player-ink/45 sm:w-32" />
             </div>
           </div>
@@ -270,7 +272,7 @@ function Index() {
               <X />
             </Button>
             <p className="mb-3 text-xs font-semibold uppercase text-player-soft">About this trailer</p>
-            <h2 className="text-xl font-semibold">Beyond the Horizon</h2>
+            <h2 className="text-xl font-semibold">Kimote</h2>
             <p className="mt-2 text-sm leading-6 text-player-soft">
               A lone explorer follows an ancient map into a valley where every path leads to a new beginning.
             </p>
@@ -371,6 +373,14 @@ function Index() {
           <Play className="size-5 fill-current" aria-hidden="true" />
           Watch Kimote full movie
         </a>
+        <Button
+          variant="playerPill"
+          onClick={() => setShowMore(true)}
+          className="mt-3 h-12 w-full text-sm font-medium"
+        >
+          <ListVideo className="size-5" aria-hidden="true" />
+          More videos
+        </Button>
       </div>
     </main>
   );
