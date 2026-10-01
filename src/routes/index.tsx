@@ -10,7 +10,7 @@ const POSTER_URL = `${SITE_URL}${bedroomChainsPoster.url}`;
 const TRAILER_URL = "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev/trailers/a684ad3e-c0ca-4d22-afd9-fd2bb07557b8-Bedroom_Chains_Trailer_Final.mp4";
 const FULL_URL = "https://hassanmageye.com/films/bedroom-chains";
 const MORE_URL = "https://hassanmageye.com/films";
-const SYNOPSIS = "BedRoom Chains, written and directed by Hassan Mageye, starring Nisha Kalema, Nabakiibi Joanah Jojo, Edris Lubega, Jeff Robert's Walusimbi and Sarah Kisawuzi.";
+const SYNOPSIS = "Rejected by her father simply because she was born a girl, young Natasha is sold to an Indian family in Uganda. When President Idi Amin orders the expulsion of Asians, she is forced to leave the country with her adoptive family. Years later, Natasha returns to Uganda as an educated woman determined to confront the traditions that denied her dignity and opportunity. Her fight against gender discrimination inspires a women's liberation movement that challenges the country's social and legal structures. A story of courage, equality and a woman's determination to change her society.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
