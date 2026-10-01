@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ListVideo, Loader2, Maximize2, Pause, Play, RotateCcw, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import kimotePoster from "@/assets/kimote-poster.jpg.asset.json";
 import { Button } from "@/components/ui/button";
