@@ -67,6 +67,7 @@ function Index() {
   const [duration, setDuration] = useState(0);
   const [ended, setEnded] = useState(false);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const play = async () => {
     const video = videoRef.current;
@@ -135,6 +136,12 @@ function Index() {
               if (Number.isFinite(value)) setDuration(value);
             }}
             onTimeUpdate={(event) => setElapsed(event.currentTarget.currentTime)}
+            onLoadStart={() => setLoading(true)}
+            onWaiting={() => setLoading(true)}
+            onCanPlay={() => setLoading(false)}
+            onPlaying={() => setLoading(false)}
+            onSeeking={() => setLoading(true)}
+            onSeeked={() => setLoading(false)}
             onPlay={() => { setPlaying(true); setEnded(false); setError(false); }}
             onPause={() => setPlaying(false)}
             onEnded={() => { setPlaying(false); setEnded(true); setElapsed(videoRef.current?.duration ?? 0); }}
@@ -146,6 +153,13 @@ function Index() {
           <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-player-surface/75 to-transparent" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-player-surface/90 to-transparent" />
           <div className="pointer-events-none absolute left-4 top-3 text-sm font-semibold sm:left-6 sm:top-5 sm:text-base">KIMOTE (2025) · Official trailer</div>
+
+          {loading && !error && !ended && (
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-3 bg-player-surface/40">
+              <Loader2 className="size-10 animate-spin text-player-ink sm:size-12" aria-hidden="true" />
+              <p className="text-xs font-medium text-player-ink/90 sm:text-sm">Loading trailer…</p>
+            </div>
+          )}
 
           {error ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-player-surface/85 p-5 text-center">
