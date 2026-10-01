@@ -135,7 +135,7 @@ function Index() {
       <section
         ref={playerRef}
         aria-label="Beyond the Horizon trailer"
-        className="relative aspect-video w-full overflow-hidden rounded-none bg-player-surface shadow-2xl sm:max-w-[1200px] sm:rounded-3xl"
+        className="relative h-[68svh] w-full overflow-hidden rounded-none bg-player-surface shadow-2xl sm:aspect-video sm:h-auto sm:max-w-[1200px] sm:rounded-3xl"
       >
         <video
           ref={videoRef}
