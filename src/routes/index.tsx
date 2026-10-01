@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ListVideo, Maximize2, Pause, Play, RotateCcw, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
+import { ListVideo, Loader2, Maximize2, Pause, Play, RotateCcw, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
 import { useRef, useState } from "react";
 
 import kimotePoster from "@/assets/kimote-poster.jpg.asset.json";
 import { Button } from "@/components/ui/button";
 
+const SITE_URL = "https://kimote.hassanmageye.com";
+const POSTER_URL = `${SITE_URL}${kimotePoster.url}`;
 const TRAILER_URL = "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev/trailers/80f921c5-2b36-4daa-92fd-1c88f2452c21-KIMOTE_OFFICIAL_TRAILER.mp4";
 const FULL_URL = "https://hassanmageye.com/films/kimote";
 const MORE_URL = "https://hassanmageye.com/films";
@@ -18,11 +20,16 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Watch Kimote Full Movie by Hassan Mageye" },
       { property: "og:description", content: "Watch the official trailer for Kimote (2025), a film about barkcloth, cultural inheritance, and the courage to reinvent tradition." },
       { property: "og:type", content: "video.movie" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: POSTER_URL },
+      { property: "og:image:width", content: "1280" },
+      { property: "og:image:height", content: "1920" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: POSTER_URL },
       { name: "keywords", content: "Kimote, Kimote movie, Kimote 2025, Hassan Mageye, Ugandan film, barkcloth film, African cinema" },
     ],
     links: [
-      { rel: "canonical", href: "/" },
+      { rel: "canonical", href: SITE_URL },
       { rel: "preconnect", href: "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev" },
     ],
     scripts: [
@@ -35,8 +42,9 @@ export const Route = createFileRoute("/")({
           dateCreated: "2025",
           director: { "@type": "Person", name: "Hassan Mageye" },
           description: SYNOPSIS,
-          url: FULL_URL,
-          trailer: { "@type": "VideoObject", name: "Kimote Official Trailer", contentUrl: TRAILER_URL, description: SYNOPSIS, uploadDate: "2025-01-01" },
+          url: SITE_URL,
+          image: POSTER_URL,
+          trailer: { "@type": "VideoObject", name: "Kimote Official Trailer", contentUrl: TRAILER_URL, thumbnailUrl: POSTER_URL, description: SYNOPSIS, uploadDate: "2025-01-01" },
         }),
       },
     ],
