@@ -359,6 +359,19 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* Mobile: watch full movie button under the player */}
+      <div className="w-full px-4 pt-4 sm:hidden">
+        <a
+          href="https://hassanmageye.com/films/kimote"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex h-14 w-full items-center justify-center gap-2.5 rounded-full bg-player-brand text-base font-semibold text-primary-foreground shadow-xl transition-transform active:scale-95"
+        >
+          <Play className="size-5 fill-current" aria-hidden="true" />
+          Watch Kimote full movie
+        </a>
+      </div>
     </main>
   );
 }
