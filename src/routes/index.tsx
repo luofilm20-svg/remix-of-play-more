@@ -69,11 +69,34 @@ function Index() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // The video can finish loading before the page becomes interactive, so its
+  // early events get missed. Re-read its real state on mount and keep in sync.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const sync = () => {
+      if (Number.isFinite(video.duration) && video.duration > 0) setDuration(video.duration);
+      setElapsed(video.currentTime);
+      setPlaying(!video.paused && !video.ended);
+      setLoading(video.readyState < 3 && !video.error);
+      if (video.error) setError(true);
+    };
+    sync();
+    const events = ["loadedmetadata", "durationchange", "timeupdate", "progress", "canplay", "canplaythrough", "playing", "waiting", "seeking", "seeked", "stalled"];
+    events.forEach((e) => video.addEventListener(e, sync));
+    const timer = window.setInterval(sync, 250);
+    return () => {
+      events.forEach((e) => video.removeEventListener(e, sync));
+      window.clearInterval(timer);
+    };
+  }, []);
+
   const play = async () => {
     const video = videoRef.current;
     if (!video) return;
     if (video.ended) video.currentTime = 0;
     setEnded(false);
+    if (video.readyState < 3) setLoading(true);
     try {
       await video.play();
       setError(false);
