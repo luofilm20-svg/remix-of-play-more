@@ -145,7 +145,7 @@ function Index() {
           <video
             ref={videoRef}
             src={TRAILER_URL}
-            poster={bedroomChainsPoster.url}
+            poster={tinkasStoryPoster.url}
             preload="auto"
             playsInline
             muted={muted}
