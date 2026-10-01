@@ -136,9 +136,9 @@ function Index() {
           ) : (
             <>
               <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-3 sm:gap-5">
-                <Button variant="playerGlass" size="icon" className="size-10 sm:size-12" onClick={() => skip(-5)} aria-label="Back 5 seconds" title="Back 5 seconds"><SkipBack /></Button>
+                <Button variant="playerGlass" size="icon" className="size-10 sm:size-12" onClick={() => skip(-5)} disabled={!duration} aria-label="Back 5 seconds" title="Back 5 seconds"><SkipBack /></Button>
                 <Button variant="playerGlass" size="icon" className="size-14 sm:size-18" onClick={togglePlayback} aria-label={playing ? "Pause" : "Play"} title={playing ? "Pause" : "Play"}>{playing ? <Pause className="size-6 fill-current" /> : <Play className="size-6 fill-current" />}</Button>
-                <Button variant="playerGlass" size="icon" className="size-10 sm:size-12" onClick={() => skip(5)} aria-label="Forward 5 seconds" title="Forward 5 seconds"><SkipForward /></Button>
+                <Button variant="playerGlass" size="icon" className="size-10 sm:size-12" onClick={() => skip(5)} disabled={!duration} aria-label="Forward 5 seconds" title="Forward 5 seconds"><SkipForward /></Button>
               </div>
               <div className="absolute inset-x-0 bottom-0 px-4 pb-2 sm:px-6 sm:pb-4">
                 <div className="mb-1 flex justify-between text-xs font-medium tabular-nums"><span>{formatTime(elapsed)}</span><span>{duration ? formatTime(duration) : "--:--"}</span></div>
