@@ -79,10 +79,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Beyond the Horizon" },
+      { title: "Watch Kimote Full Movie by Hassan Mageye" },
       { name: "description", content: "A cinematic trailer experience." },
-      { name: "author", content: "Beyond the Horizon" },
-      { property: "og:title", content: "Beyond the Horizon" },
+      { name: "author", content: "Hassan Mageye" },
+      { property: "og:title", content: "Watch Kimote Full Movie by Hassan Mageye" },
       { property: "og:description", content: "A cinematic trailer experience." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

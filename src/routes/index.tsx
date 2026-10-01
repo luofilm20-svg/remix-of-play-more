@@ -33,9 +33,9 @@ const TRAILER_URL =
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Kimote — Official Trailer" },
+      { title: "Watch Kimote Full Movie by Hassan Mageye" },
       { name: "description", content: "Watch the official trailer for Kimote." },
-      { property: "og:title", content: "Kimote — Official Trailer" },
+      { property: "og:title", content: "Watch Kimote Full Movie by Hassan Mageye" },
       { property: "og:description", content: "Watch the official trailer for Kimote." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -45,6 +45,8 @@ export const Route = createFileRoute("/")({
 });
 
 const DURATION = 30;
+const FULL_URL = "https://hassanmageye.com/films/kimote";
+const MORE_URL = "https://hassanmageye.com/films";
 
 function formatTime(seconds: number) {
   const total = Math.floor(seconds);
@@ -59,6 +61,10 @@ function Index() {
   const [showMore, setShowMore] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [ended, setEnded] = useState(false);
+  const [speed, setSpeed] = useState(1);
+  const [vote, setVote] = useState<"up" | "down" | null>(null);
+  const [saved, setSaved] = useState(false);
+  const [dragging, setDragging] = useState(false);
   const playerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -106,17 +112,27 @@ function Index() {
     videoRef.current.currentTime = Math.min(duration, Math.max(0, videoRef.current.currentTime + delta));
   };
 
-  const seek = (clientX: number, trackWidth: number) => {
-    const nextTime = (clientX / trackWidth) * duration;
+  const seek = (clientX: number, rect: DOMRect) => {
+    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    const nextTime = ratio * duration;
     setElapsed(nextTime);
     if (videoRef.current) videoRef.current.currentTime = nextTime;
   };
 
   const watchFull = () => {
-    if (videoRef.current) videoRef.current.currentTime = 0;
-    setElapsed(0);
-    setEnded(false);
-    setPlaying(true);
+    setPlaying(false);
+    window.open(FULL_URL, "_blank", "noopener,noreferrer");
+  };
+  const moreVideos = () => window.open(MORE_URL, "_blank", "noopener,noreferrer");
+  const share = async () => {
+    const data = { title: "Watch Kimote Full Movie by Hassan Mageye", url: window.location.href };
+    if (navigator.share) await navigator.share(data).catch(() => undefined);
+    else await navigator.clipboard?.writeText(data.url);
+  };
+  const setRate = (r: number) => {
+    setSpeed(r);
+    if (videoRef.current) videoRef.current.playbackRate = r;
+    setShowSettings(false);
   };
 
   const enterFullscreen = () => {
@@ -137,7 +153,7 @@ function Index() {
       <section
         ref={playerRef}
         aria-label="Kimote official trailer"
-        className="relative h-[68svh] w-full overflow-hidden rounded-none bg-player-surface shadow-2xl sm:aspect-video sm:h-auto sm:max-w-[1200px] sm:rounded-3xl"
+        className="relative aspect-video max-h-[70svh] w-full overflow-hidden rounded-none bg-player-surface shadow-2xl sm:max-w-[1200px] sm:rounded-3xl"
       >
         <video
           ref={videoRef}
@@ -146,15 +162,18 @@ function Index() {
           autoPlay
           muted={muted}
           playsInline
-          onTimeUpdate={(event) => setElapsed(event.currentTarget.currentTime)}
+          onTimeUpdate={(event) => !dragging && setElapsed(event.currentTarget.currentTime)}
           onLoadedMetadata={(event) => setDuration(event.currentTarget.duration || DURATION)}
+          onDurationChange={(event) => Number.isFinite(event.currentTarget.duration) && setDuration(event.currentTarget.duration)}
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
           onEnded={() => {
             setPlaying(false);
             setEnded(true);
           }}
           onClick={togglePlayback}
           aria-label="Kimote official trailer video"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full bg-black object-contain sm:object-cover"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-player-surface/40 via-transparent to-player-surface/60" />
 
@@ -166,7 +185,7 @@ function Index() {
               <h2 className="mt-2 text-2xl font-semibold text-player-ink sm:text-3xl">Kimote</h2>
             </div>
             <a
-              href="https://hassanmageye.com/films/kimote"
+              href={FULL_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center gap-2.5 rounded-full bg-player-brand px-7 text-base font-semibold text-primary-foreground shadow-2xl transition-transform hover:scale-105 sm:h-[4.5rem] sm:gap-3 sm:px-12 sm:text-xl"
@@ -254,14 +273,13 @@ function Index() {
         {/* Settings menu */}
         {showSettings && (
           <div className="absolute right-4 top-20 w-64 rounded-2xl bg-player-surface/95 py-2 text-sm text-player-ink shadow-2xl sm:right-6 sm:top-24">
-            <div className="flex items-center justify-between px-4 py-3">
-              <span>Playback speed</span>
-              <span className="text-player-soft">Normal ›</span>
-            </div>
-            <div className="flex items-center justify-between px-4 py-3">
-              <span>Quality</span>
-              <span className="text-player-soft">1080p HD ›</span>
-            </div>
+            <p className="px-4 py-2 text-xs uppercase text-player-soft">Playback speed</p>
+            {[0.5, 0.75, 1, 1.25, 1.5, 2].map((r) => (
+              <button key={r} type="button" onClick={() => setRate(r)} className="flex w-full items-center justify-between px-4 py-2 text-left hover:bg-player-ink/10">
+                <span>{r === 1 ? "Normal" : `${r}x`}</span>
+                {speed === r && <span className="text-player-progress">●</span>}
+              </button>
+            ))}
           </div>
         )}
 
@@ -278,7 +296,7 @@ function Index() {
             </p>
             <div className="mt-4 flex items-center gap-2 rounded-xl bg-player-ink/10 p-3">
               <ListVideo className="size-5 shrink-0" />
-              <p className="text-sm">More videos coming soon</p>
+              <a href={MORE_URL} target="_blank" rel="noopener noreferrer" className="text-sm underline">More videos by Hassan Mageye</a>
             </div>
           </aside>
         )}
@@ -298,11 +316,26 @@ function Index() {
             </Button>
           </div>
 
-          <button
-            type="button"
+          <div className="mb-1 flex justify-between text-xs font-medium tabular-nums text-player-ink">
+            <span>{formatTime(elapsed)}</span>
+            <span>{formatTime(duration)}</span>
+          </div>
+          <div
+            role="slider"
+            tabIndex={0}
             aria-label="Seek trailer"
-            onClick={(event) => seek(event.clientX, event.currentTarget.getBoundingClientRect().width)}
-            className="group/track flex h-4 w-full cursor-pointer items-center"
+            aria-valuemin={0}
+            aria-valuemax={Math.floor(duration)}
+            aria-valuenow={Math.floor(elapsed)}
+            onPointerDown={(event) => {
+              event.currentTarget.setPointerCapture(event.pointerId);
+              setDragging(true);
+              seek(event.clientX, event.currentTarget.getBoundingClientRect());
+            }}
+            onPointerMove={(event) => dragging && seek(event.clientX, event.currentTarget.getBoundingClientRect())}
+            onPointerUp={() => setDragging(false)}
+            onPointerCancel={() => setDragging(false)}
+            className="group/track flex h-6 w-full cursor-pointer touch-none items-center"
           >
             <span className="relative h-1 w-full rounded-full bg-player-track">
               <span
@@ -314,23 +347,23 @@ function Index() {
                 style={{ left: `${(elapsed / duration) * 100}%` }}
               />
             </span>
-          </button>
+          </div>
 
           <div className="mt-3 flex items-center justify-between gap-2">
             <div className="flex items-center gap-1.5 sm:gap-2">
-              <Button variant="playerGlass" size="icon" className="size-10" aria-label="I like this">
+              <Button variant="playerGlass" size="icon" className={`size-10 ${vote === "up" ? "text-player-progress" : ""}`} onClick={() => setVote(vote === "up" ? null : "up")} aria-pressed={vote === "up"} aria-label="I like this">
                 <ThumbsUp />
               </Button>
-              <Button variant="playerGlass" size="icon" className="size-10" aria-label="I dislike this">
+              <Button variant="playerGlass" size="icon" className={`size-10 ${vote === "down" ? "text-player-progress" : ""}`} onClick={() => setVote(vote === "down" ? null : "down")} aria-pressed={vote === "down"} aria-label="I dislike this">
                 <ThumbsDown />
               </Button>
-              <Button variant="playerGlass" size="icon" className="hidden size-10 sm:inline-flex" aria-label="Comments">
+              <Button variant="playerGlass" size="icon" className="hidden size-10 sm:inline-flex" onClick={() => window.open(FULL_URL, "_blank", "noopener,noreferrer")} aria-label="Comments">
                 <MessageSquare />
               </Button>
-              <Button variant="playerGlass" size="icon" className="hidden size-10 sm:inline-flex" aria-label="Share">
+              <Button variant="playerGlass" size="icon" className="hidden size-10 sm:inline-flex" onClick={() => void share()} aria-label="Share">
                 <Forward />
               </Button>
-              <Button variant="playerGlass" size="icon" className="hidden size-10 sm:inline-flex" aria-label="Save">
+              <Button variant="playerGlass" size="icon" className={`hidden size-10 sm:inline-flex ${saved ? "text-player-progress" : ""}`} onClick={() => setSaved(!saved)} aria-pressed={saved} aria-label="Save">
                 <Bookmark />
               </Button>
               <Button
@@ -344,7 +377,7 @@ function Index() {
               </Button>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="playerPill" onClick={() => setShowMore(true)} className="h-10 px-4 text-sm font-medium sm:h-11 sm:px-5">
+              <Button variant="playerPill" onClick={moreVideos} className="h-10 px-4 text-sm font-medium sm:h-11 sm:px-5">
                 More videos
               </Button>
               <Button
@@ -365,7 +398,7 @@ function Index() {
       {/* Mobile: watch full movie button under the player */}
       <div className="w-full px-4 pt-4 sm:hidden">
         <a
-          href="https://hassanmageye.com/films/kimote"
+          href={FULL_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="flex h-14 w-full items-center justify-center gap-2.5 rounded-full bg-player-brand text-base font-semibold text-primary-foreground shadow-xl transition-transform active:scale-95"
@@ -375,7 +408,7 @@ function Index() {
         </a>
         <Button
           variant="playerPill"
-          onClick={() => setShowMore(true)}
+          onClick={moreVideos}
           className="mt-3 h-12 w-full text-sm font-medium"
         >
           <ListVideo className="size-5" aria-hidden="true" />
