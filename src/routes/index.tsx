@@ -2,31 +2,31 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ListVideo, Loader2, Maximize2, Pause, Play, RotateCcw, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-import bedroomChainsPoster from "@/assets/bedroom-chains-poster.jpg.asset.json";
+import tinkasStoryPoster from "@/assets/tinkas-story-poster.jpg.asset.json";
 import { Button } from "@/components/ui/button";
 
 const SITE_URL = "https://kimote.hassanmageye.com";
-const POSTER_URL = `${SITE_URL}${bedroomChainsPoster.url}`;
-const TRAILER_URL = "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev/trailers/a684ad3e-c0ca-4d22-afd9-fd2bb07557b8-Bedroom_Chains_Trailer_Final.mp4";
-const FULL_URL = "https://hassanmageye.com/films/bedroom-chains";
+const POSTER_URL = `${SITE_URL}${tinkasStoryPoster.url}`;
+const TRAILER_URL = "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev/trailers/af45635d-a542-402a-8910-53d42c040bbb-TINKA_S_STORY_OFFICIAL_TRAILER__1_.mp4";
+const FULL_URL = "https://hassanmageye.com/films/tinkas-story";
 const MORE_URL = "https://hassanmageye.com/films";
-const SYNOPSIS = "Rejected by her father simply because she was born a girl, young Natasha is sold to an Indian family in Uganda. When President Idi Amin orders the expulsion of Asians, she is forced to leave the country with her adoptive family. Years later, Natasha returns to Uganda as an educated woman determined to confront the traditions that denied her dignity and opportunity. Her fight against gender discrimination inspires a women's liberation movement that challenges the country's social and legal structures. A story of courage, equality and a woman's determination to change her society.";
+const SYNOPSIS = "Driven by grief and an unwavering belief in life after death, Tinka, a brilliant scientist, ventures beyond the boundaries of conventional science in a desperate attempt to bring her deceased husband back to life. Combining scientific experimentation with ancient rituals, she embarks on a dangerous journey into the unknown. But as her experiments begin to produce terrifying results, Tinka discovers that disturbing the boundary between life and death comes at a price. Caught between love, obsession, and supernatural forces she can no longer control, Tinka must confront the horrifying consequences of her quest to reunite with the man she refuses to let go.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Watch Bedroom Chains Full Movie by Hassan Mageye" },
-      { name: "description", content: "Watch the official trailer for BedRoom Chains, a film written and directed by Hassan Mageye." },
-      { property: "og:title", content: "Watch Bedroom Chains Full Movie by Hassan Mageye" },
-      { property: "og:description", content: "Watch the official trailer for BedRoom Chains, a film written and directed by Hassan Mageye." },
+      { title: "Watch Tinka's Story Full Movie by Hassan Mageye" },
+      { name: "description", content: "Watch the official trailer for Tinka's Story, a film written and directed by Hassan Mageye." },
+      { property: "og:title", content: "Watch Tinka's Story Full Movie by Hassan Mageye" },
+      { property: "og:description", content: "Watch the official trailer for Tinka's Story, a film written and directed by Hassan Mageye." },
       { property: "og:type", content: "video.movie" },
       { property: "og:url", content: SITE_URL },
       { property: "og:image", content: POSTER_URL },
-      { property: "og:image:width", content: "1731" },
+      { property: "og:image:width", content: "1357" },
       { property: "og:image:height", content: "1920" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: POSTER_URL },
-      { name: "keywords", content: "Bedroom Chains, BedRoom Chains movie, Bedroom Chains trailer, Hassan Mageye, Ugandan film, African cinema" },
+      { name: "keywords", content: "Tinka's Story, Tinkas Story movie, Tinka's Story trailer, Hassan Mageye, Ugandan film, African cinema" },
     ],
     links: [
       { rel: "canonical", href: SITE_URL },
@@ -38,12 +38,12 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Movie",
-          name: "Bedroom Chains",
+          name: "Tinka's Story",
           director: { "@type": "Person", name: "Hassan Mageye" },
           description: SYNOPSIS,
           url: SITE_URL,
           image: POSTER_URL,
-          trailer: { "@type": "VideoObject", name: "Bedroom Chains Official Trailer", contentUrl: TRAILER_URL, thumbnailUrl: POSTER_URL, description: SYNOPSIS, uploadDate: "2026-01-01" },
+          trailer: { "@type": "VideoObject", name: "Tinka's Story Official Trailer", contentUrl: TRAILER_URL, thumbnailUrl: POSTER_URL, description: SYNOPSIS, uploadDate: "2026-01-01" },
         }),
       },
     ],
@@ -141,7 +141,7 @@ function Index() {
   return (
     <main className="min-h-screen bg-player-page pb-12 text-foreground sm:px-8 sm:py-10">
       <div className="mx-auto w-full max-w-[1100px]">
-        <section ref={playerRef} aria-label="Bedroom Chains official trailer" className="relative aspect-[4/3] w-full overflow-hidden bg-player-surface text-player-ink sm:aspect-video sm:rounded-lg">
+        <section ref={playerRef} aria-label="Tinka's Story official trailer" className="relative aspect-[4/3] w-full overflow-hidden bg-player-surface text-player-ink sm:aspect-video sm:rounded-lg">
           <video
             ref={videoRef}
             src={TRAILER_URL}
@@ -169,12 +169,12 @@ function Index() {
             onEnded={() => { setPlaying(false); setEnded(true); setElapsed(videoRef.current?.duration ?? 0); }}
             onError={() => setError(true)}
             onClick={togglePlayback}
-            aria-label="Bedroom Chains official trailer video"
+            aria-label="Tinka's Story official trailer video"
             className="absolute inset-0 h-full w-full object-contain"
           />
           <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-player-surface/75 to-transparent" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-player-surface/90 to-transparent" />
-          <div className="pointer-events-none absolute left-4 top-3 text-sm font-semibold sm:left-6 sm:top-5 sm:text-base">BedRoom Chains · Official trailer</div>
+          <div className="pointer-events-none absolute left-4 top-3 text-sm font-semibold sm:left-6 sm:top-5 sm:text-base">Tinka's Story · Official trailer</div>
 
           {loading && !error && !ended && (
             <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-3 bg-player-surface/40">
