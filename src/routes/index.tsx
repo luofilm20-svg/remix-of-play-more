@@ -11,6 +11,7 @@ import {
   Pause,
   PictureInPicture2,
   Play,
+  RotateCcw,
   Settings,
   SkipBack,
   SkipForward,
@@ -54,6 +55,7 @@ function Index() {
   const [duration, setDuration] = useState(DURATION);
   const [showMore, setShowMore] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [ended, setEnded] = useState(false);
   const playerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -84,8 +86,16 @@ function Index() {
   });
 
   const togglePlayback = () => {
+    setEnded(false);
     if (elapsed >= duration && videoRef.current) videoRef.current.currentTime = 0;
     setPlaying((current) => !current);
+  };
+
+  const replay = () => {
+    if (videoRef.current) videoRef.current.currentTime = 0;
+    setElapsed(0);
+    setEnded(false);
+    setPlaying(true);
   };
 
   const skip = (delta: number) => {
@@ -102,6 +112,7 @@ function Index() {
   const watchFull = () => {
     if (videoRef.current) videoRef.current.currentTime = 0;
     setElapsed(0);
+    setEnded(false);
     setPlaying(true);
   };
 
@@ -125,12 +136,43 @@ function Index() {
           playsInline
           onTimeUpdate={(event) => setElapsed(event.currentTarget.currentTime)}
           onLoadedMetadata={(event) => setDuration(event.currentTarget.duration || DURATION)}
-          onEnded={() => setPlaying(false)}
+          onEnded={() => {
+            setPlaying(false);
+            setEnded(true);
+          }}
           onClick={togglePlayback}
           aria-label="Beyond the Horizon video trailer"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-player-surface/40 via-transparent to-player-surface/60" />
+
+        {/* End screen */}
+        {ended && (
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-6 bg-player-surface/85 px-6 text-center backdrop-blur-sm">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-player-soft">Up next</p>
+              <h2 className="mt-2 text-2xl font-semibold text-player-ink sm:text-3xl">Beyond the Horizon</h2>
+            </div>
+            <a
+              href="https://hassanmageye.com/films/kimote"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-16 items-center gap-3 rounded-full bg-player-brand px-10 text-lg font-semibold text-primary-foreground shadow-2xl transition-transform hover:scale-105 sm:h-[4.5rem] sm:px-12 sm:text-xl"
+            >
+              <Play className="size-7 fill-current" aria-hidden="true" />
+              Watch full
+            </a>
+            <Button
+              variant="playerGlass"
+              size="icon"
+              className="size-12"
+              onClick={replay}
+              aria-label="Watch again"
+            >
+              <RotateCcw />
+            </Button>
+          </div>
+        )}
 
         {/* Top bar */}
         <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-3 p-4 sm:p-5">
