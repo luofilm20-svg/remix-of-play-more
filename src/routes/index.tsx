@@ -6,6 +6,7 @@ import {
   ChevronRight,
   Forward,
   ListVideo,
+  Maximize2,
   MessageSquare,
   MoreHorizontal,
   Pause,
@@ -117,15 +118,24 @@ function Index() {
   };
 
   const enterFullscreen = () => {
-    void playerRef.current?.requestFullscreen?.();
+    if (document.fullscreenElement) {
+      void document.exitFullscreen();
+      return;
+    }
+    if (playerRef.current?.requestFullscreen) {
+      void playerRef.current.requestFullscreen();
+      return;
+    }
+    const video = videoRef.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
+    video?.webkitEnterFullscreen?.();
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-player-page p-4 sm:p-8">
+    <main className="flex min-h-screen flex-col items-center justify-start bg-player-page sm:justify-center sm:p-8">
       <section
         ref={playerRef}
         aria-label="Beyond the Horizon trailer"
-        className="group relative aspect-video w-full max-w-[1200px] overflow-hidden rounded-3xl bg-player-surface shadow-2xl"
+        className="relative aspect-video w-full overflow-hidden rounded-none bg-player-surface shadow-2xl sm:max-w-[1200px] sm:rounded-3xl"
       >
         <video
           ref={videoRef}
