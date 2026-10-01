@@ -11,7 +11,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import tinkasStoryPoster from "../assets/tinkas-story-poster.jpg.asset.json";
+import devilsChestPoster from "../assets/devils-chest-poster.jpg.asset.json";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -80,11 +80,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Watch Tinka's Story Full Movie by Hassan Mageye" },
-      { name: "description", content: "Watch the official trailer for Tinka's Story, a film by Hassan Mageye." },
+      { title: "Watch Devil's Chest Full Movie by Hassan Mageye" },
+      { name: "description", content: "Watch the official trailer for Devil's Chest, a film by Hassan Mageye." },
       { name: "author", content: "Hassan Mageye" },
-      { property: "og:title", content: "Watch Tinka's Story Full Movie by Hassan Mageye" },
-      { property: "og:description", content: "Watch the official trailer for Tinka's Story, a film by Hassan Mageye." },
+      { property: "og:title", content: "Watch Devil's Chest Full Movie by Hassan Mageye" },
+      { property: "og:description", content: "Watch the official trailer for Devil's Chest, a film by Hassan Mageye." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -93,8 +93,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: tinkasStoryPoster.url, type: "image/jpeg" },
-      { rel: "apple-touch-icon", href: tinkasStoryPoster.url },
+      { rel: "icon", href: devilsChestPoster.url, type: "image/jpeg" },
+      { rel: "apple-touch-icon", href: devilsChestPoster.url },
     ],
   }),
   shellComponent: RootShell,

@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 const SITE_URL = "https://kimote.hassanmageye.com";
-const POSTER_PATH = "/__l5e/assets-v1/f2fac04a-b25f-4a95-a5e0-cf9cbeca4fa3/tinkas-story-poster.jpg";
-const TRAILER_URL = "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev/trailers/af45635d-a542-402a-8910-53d42c040bbb-TINKA_S_STORY_OFFICIAL_TRAILER__1_.mp4";
+const POSTER_PATH = "/__l5e/assets-v1/c4eb52cc-bf71-4d31-976a-b16bbf675f1e/devils-chest-poster.jpg";
+const TRAILER_URL = "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev/trailers/1845449e-73f5-4257-afa1-def6ae33c5d4-DEVIL_S_CHEST_-_Trailer_1080_.mp4";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -16,15 +16,15 @@ export const Route = createFileRoute("/sitemap.xml")({
     <priority>1.0</priority>
     <image:image>
       <image:loc>${SITE_URL}${POSTER_PATH}</image:loc>
-      <image:title>Tinka's Story official poster</image:title>
+      <image:title>Devil's Chest official poster</image:title>
     </image:image>
     <video:video>
       <video:thumbnail_loc>${SITE_URL}${POSTER_PATH}</video:thumbnail_loc>
-      <video:title>Tinka's Story Official Trailer</video:title>
-      <video:description>Watch the official trailer for Tinka's Story, a film written and directed by Hassan Mageye.</video:description>
+      <video:title>Devil's Chest Official Trailer</video:title>
+      <video:description>Watch the official trailer for Devil's Chest, a film written and directed by Hassan Mageye.</video:description>
       <video:content_loc>${TRAILER_URL}</video:content_loc>
       <video:player_loc>${SITE_URL}/</video:player_loc>
-      <video:duration>109</video:duration>
+      <video:duration>149</video:duration>
     </video:video>
   </url>
 </urlset>`;
