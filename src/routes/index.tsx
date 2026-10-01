@@ -2,31 +2,31 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ListVideo, Loader2, Maximize2, Pause, Play, RotateCcw, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-import kimotePoster from "@/assets/kimote-poster.jpg.asset.json";
+import bedroomChainsPoster from "@/assets/bedroom-chains-poster.jpg.asset.json";
 import { Button } from "@/components/ui/button";
 
 const SITE_URL = "https://kimote.hassanmageye.com";
-const POSTER_URL = `${SITE_URL}${kimotePoster.url}`;
-const TRAILER_URL = "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev/trailers/80f921c5-2b36-4daa-92fd-1c88f2452c21-KIMOTE_OFFICIAL_TRAILER.mp4";
-const FULL_URL = "https://hassanmageye.com/films/kimote";
+const POSTER_URL = `${SITE_URL}${bedroomChainsPoster.url}`;
+const TRAILER_URL = "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev/trailers/a684ad3e-c0ca-4d22-afd9-fd2bb07557b8-Bedroom_Chains_Trailer_Final.mp4";
+const FULL_URL = "https://hassanmageye.com/films/bedroom-chains";
 const MORE_URL = "https://hassanmageye.com/films";
-const SYNOPSIS = "Born into a family renowned for generations of barkcloth craftsmanship, young Kimera faces a difficult choice when his father urges him to abandon their ancestral trade in search of a better future. Refusing to let the family's heritage disappear, Kimera sets out to transform barkcloth from a fabric associated primarily with funerary traditions into a symbol of cultural pride and contemporary African identity. As he challenges deeply rooted customs and his father's expectations, he discovers that preserving tradition sometimes requires the courage to reinvent it. A story of cultural inheritance, generational conflict and the determination to build a future without abandoning the past.";
+const SYNOPSIS = "BedRoom Chains, written and directed by Hassan Mageye, starring Nisha Kalema, Nabakiibi Joanah Jojo, Edris Lubega, Jeff Robert's Walusimbi and Sarah Kisawuzi.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Watch Kimote Full Movie by Hassan Mageye" },
-      { name: "description", content: "Watch the official trailer for Kimote (2025), a film about barkcloth, cultural inheritance, and the courage to reinvent tradition." },
-      { property: "og:title", content: "Watch Kimote Full Movie by Hassan Mageye" },
-      { property: "og:description", content: "Watch the official trailer for Kimote (2025), a film about barkcloth, cultural inheritance, and the courage to reinvent tradition." },
+      { title: "Watch Bedroom Chains Full Movie by Hassan Mageye" },
+      { name: "description", content: "Watch the official trailer for BedRoom Chains, a film written and directed by Hassan Mageye." },
+      { property: "og:title", content: "Watch Bedroom Chains Full Movie by Hassan Mageye" },
+      { property: "og:description", content: "Watch the official trailer for BedRoom Chains, a film written and directed by Hassan Mageye." },
       { property: "og:type", content: "video.movie" },
       { property: "og:url", content: SITE_URL },
       { property: "og:image", content: POSTER_URL },
-      { property: "og:image:width", content: "1280" },
+      { property: "og:image:width", content: "1731" },
       { property: "og:image:height", content: "1920" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: POSTER_URL },
-      { name: "keywords", content: "Kimote, Kimote movie, Kimote 2025, Hassan Mageye, Ugandan film, barkcloth film, African cinema" },
+      { name: "keywords", content: "Bedroom Chains, BedRoom Chains movie, Bedroom Chains trailer, Hassan Mageye, Ugandan film, African cinema" },
     ],
     links: [
       { rel: "canonical", href: SITE_URL },
@@ -38,13 +38,12 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Movie",
-          name: "Kimote",
-          dateCreated: "2025",
+          name: "Bedroom Chains",
           director: { "@type": "Person", name: "Hassan Mageye" },
           description: SYNOPSIS,
           url: SITE_URL,
           image: POSTER_URL,
-          trailer: { "@type": "VideoObject", name: "Kimote Official Trailer", contentUrl: TRAILER_URL, thumbnailUrl: POSTER_URL, description: SYNOPSIS, uploadDate: "2025-01-01" },
+          trailer: { "@type": "VideoObject", name: "Bedroom Chains Official Trailer", contentUrl: TRAILER_URL, thumbnailUrl: POSTER_URL, description: SYNOPSIS, uploadDate: "2026-01-01" },
         }),
       },
     ],
@@ -142,11 +141,11 @@ function Index() {
   return (
     <main className="min-h-screen bg-player-page pb-12 text-foreground sm:px-8 sm:py-10">
       <div className="mx-auto w-full max-w-[1100px]">
-        <section ref={playerRef} aria-label="Kimote official trailer" className="relative aspect-[4/3] w-full overflow-hidden bg-player-surface text-player-ink sm:aspect-video sm:rounded-lg">
+        <section ref={playerRef} aria-label="Bedroom Chains official trailer" className="relative aspect-[4/3] w-full overflow-hidden bg-player-surface text-player-ink sm:aspect-video sm:rounded-lg">
           <video
             ref={videoRef}
             src={TRAILER_URL}
-            poster={kimotePoster.url}
+            poster={bedroomChainsPoster.url}
             preload="auto"
             playsInline
             muted={muted}
@@ -170,12 +169,12 @@ function Index() {
             onEnded={() => { setPlaying(false); setEnded(true); setElapsed(videoRef.current?.duration ?? 0); }}
             onError={() => setError(true)}
             onClick={togglePlayback}
-            aria-label="Kimote official trailer video"
+            aria-label="Bedroom Chains official trailer video"
             className="absolute inset-0 h-full w-full object-contain"
           />
           <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-player-surface/75 to-transparent" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-player-surface/90 to-transparent" />
-          <div className="pointer-events-none absolute left-4 top-3 text-sm font-semibold sm:left-6 sm:top-5 sm:text-base">KIMOTE (2025) · Official trailer</div>
+          <div className="pointer-events-none absolute left-4 top-3 text-sm font-semibold sm:left-6 sm:top-5 sm:text-base">BedRoom Chains · Official trailer</div>
 
           {loading && !error && !ended && (
             <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-3 bg-player-surface/40">
@@ -192,7 +191,7 @@ function Index() {
             </div>
           ) : ended ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-player-surface/90 p-4 text-center sm:gap-5">
-              <p className="text-sm font-medium text-player-soft">Kimote · 2025</p>
+              <p className="text-sm font-medium text-player-soft">BedRoom Chains</p>
               <Button asChild className="h-12 rounded-full bg-player-brand px-6 text-sm font-semibold text-primary-foreground hover:bg-player-brand/90 sm:h-16 sm:px-10 sm:text-lg">
                 <a href={FULL_URL} target="_blank" rel="noopener noreferrer"><Play className="fill-current" /> Watch Kimote full movie</a>
               </Button>
@@ -230,14 +229,14 @@ function Index() {
         <div className="px-4 pt-5 sm:px-0 sm:pt-7">
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild className="h-13 w-full rounded-full bg-player-brand px-6 text-base font-semibold text-primary-foreground hover:bg-player-brand/90 sm:w-auto">
-              <a href={FULL_URL} target="_blank" rel="noopener noreferrer"><Play className="fill-current" /> Watch Kimote full movie</a>
+              <a href={FULL_URL} target="_blank" rel="noopener noreferrer"><Play className="fill-current" /> Watch Bedroom Chains full movie</a>
             </Button>
             <Button asChild variant="secondary" className="h-12 w-full rounded-full px-6 text-sm sm:w-auto">
               <a href={MORE_URL} target="_blank" rel="noopener noreferrer"><ListVideo /> More videos</a>
             </Button>
           </div>
           <article className="mt-9 max-w-3xl text-player-surface">
-            <h1 className="text-2xl font-bold sm:text-3xl">About KIMOTE (2025)</h1>
+            <h1 className="text-2xl font-bold sm:text-3xl">About BedRoom Chains</h1>
             <p className="mt-4 text-base leading-7">{SYNOPSIS}</p>
           </article>
         </div>
