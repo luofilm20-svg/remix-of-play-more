@@ -16,9 +16,8 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        player: "rounded-sm border border-player-ink/70 bg-player-surface/75 text-player-ink shadow-lg hover:bg-player-ink hover:text-player-surface",
-        playerGhost: "rounded-none bg-transparent text-player-ink hover:bg-player-ink/15",
-        playerCta: "rounded-sm bg-player-ink px-5 text-player-surface shadow-lg hover:bg-player-ink/90",
+        playerGlass: "rounded-full bg-player-ink/15 text-player-ink shadow-sm backdrop-blur-md hover:bg-player-ink/30",
+        playerPill: "rounded-full bg-player-ink/15 text-player-ink shadow-sm backdrop-blur-md hover:bg-player-ink/30",
       },
       size: {
         default: "h-9 px-4 py-2",

@@ -64,6 +64,8 @@
   --color-player-soft: var(--player-soft);
   --color-player-brand: var(--player-brand);
   --color-player-track: var(--player-track);
+  --color-player-page: var(--player-page);
+  --color-player-progress: var(--player-progress);
 }
 
 :root {
@@ -91,7 +93,9 @@
   --player-ink: oklch(0.99 0.002 95);
   --player-soft: oklch(0.99 0.002 95 / 72%);
   --player-brand: oklch(0.62 0.24 28);
-  --player-track: oklch(0.99 0.002 95 / 34%);
+  --player-track: oklch(0.99 0.002 95 / 40%);
+  --player-page: oklch(0.932 0.004 255);
+  --player-progress: oklch(0.628 0.258 29.2);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
