@@ -2,31 +2,31 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ListVideo, Loader2, Maximize2, Pause, Play, RotateCcw, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-import tinkasStoryPoster from "@/assets/tinkas-story-poster.jpg.asset.json";
+import devilsChestPoster from "@/assets/devils-chest-poster.jpg.asset.json";
 import { Button } from "@/components/ui/button";
 
 const SITE_URL = "https://kimote.hassanmageye.com";
-const POSTER_URL = `${SITE_URL}${tinkasStoryPoster.url}`;
-const TRAILER_URL = "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev/trailers/af45635d-a542-402a-8910-53d42c040bbb-TINKA_S_STORY_OFFICIAL_TRAILER__1_.mp4";
-const FULL_URL = "https://hassanmageye.com/watch/tinka's-story?kind=film";
+const POSTER_URL = `${SITE_URL}${devilsChestPoster.url}`;
+const TRAILER_URL = "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev/trailers/1845449e-73f5-4257-afa1-def6ae33c5d4-DEVIL_S_CHEST_-_Trailer_1080_.mp4";
+const FULL_URL = "https://hassanmageye.com/watch/devil's-chest?kind=film";
 const MORE_URL = "https://hassanmageye.com/films";
-const SYNOPSIS = "Driven by grief and an unwavering belief in life after death, Tinka, a brilliant scientist, ventures beyond the boundaries of conventional science in a desperate attempt to bring her deceased husband back to life. Combining scientific experimentation with ancient rituals, she embarks on a dangerous journey into the unknown. But as her experiments begin to produce terrifying results, Tinka discovers that disturbing the boundary between life and death comes at a price. Caught between love, obsession, and supernatural forces she can no longer control, Tinka must confront the horrifying consequences of her quest to reunite with the man she refuses to let go.";
+const SYNOPSIS = "Set during the Lord's Resistance Army insurgency in northern Uganda, Devil's Chest follows a village woman whose life is shattered when rebel leader Joseph Kony kills her husband and forces her to become his wife. Trapped in a brutal world of violence and captivity, she becomes a soldier and begins a dangerous struggle to reclaim her freedom. A powerful story of survival, resistance and the human cost of war.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Watch Tinka's Story Full Movie by Hassan Mageye" },
-      { name: "description", content: "Watch the official trailer for Tinka's Story, a film written and directed by Hassan Mageye." },
-      { property: "og:title", content: "Watch Tinka's Story Full Movie by Hassan Mageye" },
-      { property: "og:description", content: "Watch the official trailer for Tinka's Story, a film written and directed by Hassan Mageye." },
+      { title: "Watch Devil's Chest Full Movie by Hassan Mageye" },
+      { name: "description", content: "Watch the official trailer for Devil's Chest, a film written and directed by Hassan Mageye." },
+      { property: "og:title", content: "Watch Devil's Chest Full Movie by Hassan Mageye" },
+      { property: "og:description", content: "Watch the official trailer for Devil's Chest, a film written and directed by Hassan Mageye." },
       { property: "og:type", content: "video.movie" },
       { property: "og:url", content: SITE_URL },
       { property: "og:image", content: POSTER_URL },
-      { property: "og:image:width", content: "1357" },
-      { property: "og:image:height", content: "1920" },
+      { property: "og:image:width", content: "1437" },
+      { property: "og:image:height", content: "1440" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: POSTER_URL },
-      { name: "keywords", content: "Tinka's Story, Tinkas Story movie, Tinka's Story trailer, Hassan Mageye, Ugandan film, African cinema" },
+      { name: "keywords", content: "Devil's Chest, Devils Chest movie, Devil's Chest trailer, Hassan Mageye, Ugandan film, African cinema" },
     ],
     links: [
       { rel: "canonical", href: SITE_URL },
@@ -38,12 +38,12 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Movie",
-          name: "Tinka's Story",
+          name: "Devil's Chest",
           director: { "@type": "Person", name: "Hassan Mageye" },
           description: SYNOPSIS,
           url: SITE_URL,
           image: POSTER_URL,
-          trailer: { "@type": "VideoObject", name: "Tinka's Story Official Trailer", contentUrl: TRAILER_URL, thumbnailUrl: POSTER_URL, description: SYNOPSIS, uploadDate: "2026-01-01" },
+          trailer: { "@type": "VideoObject", name: "Devil's Chest Official Trailer", contentUrl: TRAILER_URL, thumbnailUrl: POSTER_URL, description: SYNOPSIS, uploadDate: "2026-01-01" },
         }),
       },
     ],
@@ -141,11 +141,11 @@ function Index() {
   return (
     <main className="min-h-screen bg-player-page pb-12 text-foreground sm:px-8 sm:py-10">
       <div className="mx-auto w-full max-w-[1100px]">
-        <section ref={playerRef} aria-label="Tinka's Story official trailer" className="relative aspect-[4/3] w-full overflow-hidden bg-player-surface text-player-ink sm:aspect-video sm:rounded-lg">
+        <section ref={playerRef} aria-label="Devil's Chest official trailer" className="relative aspect-[4/3] w-full overflow-hidden bg-player-surface text-player-ink sm:aspect-video sm:rounded-lg">
           <video
             ref={videoRef}
             src={TRAILER_URL}
-            poster={tinkasStoryPoster.url}
+            poster={devilsChestPoster.url}
             preload="auto"
             playsInline
             muted={muted}
@@ -169,12 +169,12 @@ function Index() {
             onEnded={() => { setPlaying(false); setEnded(true); setElapsed(videoRef.current?.duration ?? 0); }}
             onError={() => setError(true)}
             onClick={togglePlayback}
-            aria-label="Tinka's Story official trailer video"
+            aria-label="Devil's Chest official trailer video"
             className="absolute inset-0 h-full w-full object-contain"
           />
           <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-player-surface/75 to-transparent" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-player-surface/90 to-transparent" />
-          <div className="pointer-events-none absolute left-4 top-3 text-sm font-semibold sm:left-6 sm:top-5 sm:text-base">Tinka's Story · Official trailer</div>
+          <div className="pointer-events-none absolute left-4 top-3 text-sm font-semibold sm:left-6 sm:top-5 sm:text-base">Devil's Chest · Official trailer</div>
 
           {loading && !error && !ended && (
             <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-3 bg-player-surface/40">
@@ -191,9 +191,9 @@ function Index() {
             </div>
           ) : ended ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-player-surface/90 p-4 text-center sm:gap-5">
-              <p className="text-sm font-medium text-player-soft">Tinka's Story</p>
+              <p className="text-sm font-medium text-player-soft">Devil's Chest</p>
               <Button asChild className="h-12 rounded-full bg-player-brand px-6 text-sm font-semibold text-primary-foreground hover:bg-player-brand/90 sm:h-16 sm:px-10 sm:text-lg">
-                <a href={FULL_URL} target="_blank" rel="noopener noreferrer"><Play className="fill-current" /> Watch Tinka's Story full movie</a>
+                <a href={FULL_URL} target="_blank" rel="noopener noreferrer"><Play className="fill-current" /> Watch Devil's Chest full movie</a>
               </Button>
               <Button variant="playerGlass" size="icon" className="size-10" aria-label="Replay trailer" title="Replay trailer" onClick={() => void play()}><RotateCcw /></Button>
             </div>
@@ -229,14 +229,14 @@ function Index() {
         <div className="px-4 pt-5 sm:px-0 sm:pt-7">
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild className="h-13 w-full rounded-full bg-player-brand px-6 text-base font-semibold text-primary-foreground hover:bg-player-brand/90 sm:w-auto">
-              <a href={FULL_URL} target="_blank" rel="noopener noreferrer"><Play className="fill-current" /> Watch Tinka's Story full movie</a>
+              <a href={FULL_URL} target="_blank" rel="noopener noreferrer"><Play className="fill-current" /> Watch Devil's Chest full movie</a>
             </Button>
             <Button asChild variant="secondary" className="h-12 w-full rounded-full px-6 text-sm sm:w-auto">
               <a href={MORE_URL} target="_blank" rel="noopener noreferrer"><ListVideo /> More videos</a>
             </Button>
           </div>
           <article className="mt-9 max-w-3xl text-player-surface">
-            <h1 className="text-2xl font-bold sm:text-3xl">About Tinka's Story</h1>
+            <h1 className="text-2xl font-bold sm:text-3xl">About Devil's Chest</h1>
             <p className="mt-4 text-base leading-7">{SYNOPSIS}</p>
           </article>
         </div>
