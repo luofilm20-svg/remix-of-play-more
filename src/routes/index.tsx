@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 const SITE_URL = "https://kimote.hassanmageye.com";
 const POSTER_URL = `${SITE_URL}${tinkasStoryPoster.url}`;
 const TRAILER_URL = "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev/trailers/af45635d-a542-402a-8910-53d42c040bbb-TINKA_S_STORY_OFFICIAL_TRAILER__1_.mp4";
-const FULL_URL = "https://hassanmageye.com/films/tinkas-story";
+const FULL_URL = "https://hassanmageye.com/watch/tinka's-story?kind=film";
 const MORE_URL = "https://hassanmageye.com/films";
 const SYNOPSIS = "Driven by grief and an unwavering belief in life after death, Tinka, a brilliant scientist, ventures beyond the boundaries of conventional science in a desperate attempt to bring her deceased husband back to life. Combining scientific experimentation with ancient rituals, she embarks on a dangerous journey into the unknown. But as her experiments begin to produce terrifying results, Tinka discovers that disturbing the boundary between life and death comes at a price. Caught between love, obsession, and supernatural forces she can no longer control, Tinka must confront the horrifying consequences of her quest to reunite with the man she refuses to let go.";
 
