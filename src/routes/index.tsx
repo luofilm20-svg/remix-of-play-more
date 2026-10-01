@@ -86,8 +86,16 @@ function Index() {
   });
 
   const togglePlayback = () => {
+    setEnded(false);
     if (elapsed >= duration && videoRef.current) videoRef.current.currentTime = 0;
     setPlaying((current) => !current);
+  };
+
+  const replay = () => {
+    if (videoRef.current) videoRef.current.currentTime = 0;
+    setElapsed(0);
+    setEnded(false);
+    setPlaying(true);
   };
 
   const skip = (delta: number) => {
@@ -104,6 +112,7 @@ function Index() {
   const watchFull = () => {
     if (videoRef.current) videoRef.current.currentTime = 0;
     setElapsed(0);
+    setEnded(false);
     setPlaying(true);
   };
 
