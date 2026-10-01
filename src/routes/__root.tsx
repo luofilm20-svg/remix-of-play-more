@@ -11,7 +11,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import bedroomChainsPoster from "../assets/bedroom-chains-poster.jpg.asset.json";
+import tinkasStoryPoster from "../assets/tinkas-story-poster.jpg.asset.json";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
