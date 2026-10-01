@@ -19,6 +19,26 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Watch the official trailer for Kimote (2025), a film about barkcloth, cultural inheritance, and the courage to reinvent tradition." },
       { property: "og:type", content: "video.movie" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "keywords", content: "Kimote, Kimote movie, Kimote 2025, Hassan Mageye, Ugandan film, barkcloth film, African cinema" },
+    ],
+    links: [
+      { rel: "canonical", href: "/" },
+      { rel: "preconnect", href: "https://pub-eb00261df49f466a9e5efee154650b48.r2.dev" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Movie",
+          name: "Kimote",
+          dateCreated: "2025",
+          director: { "@type": "Person", name: "Hassan Mageye" },
+          description: SYNOPSIS,
+          url: FULL_URL,
+          trailer: { "@type": "VideoObject", name: "Kimote Official Trailer", contentUrl: TRAILER_URL, description: SYNOPSIS, uploadDate: "2025-01-01" },
+        }),
+      },
     ],
   }),
   component: Index,
@@ -95,7 +115,7 @@ function Index() {
             ref={videoRef}
             src={TRAILER_URL}
             poster={kimotePoster.url}
-            preload="metadata"
+            preload="auto"
             playsInline
             muted={muted}
             onLoadedMetadata={(event) => {
