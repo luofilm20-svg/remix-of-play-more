@@ -14,6 +14,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 
 import horizonPoster from "@/assets/horizon-poster.jpg";
+import trailerAsset from "@/assets/beyond-the-horizon.mp4.asset.json";
 import { Button } from "@/components/ui/button";
 
 // No head() here: the home route inherits title/description/og/twitter from
@@ -45,29 +46,28 @@ function Index() {
   const [elapsed, setElapsed] = useState(0);
   const [showMore, setShowMore] = useState(false);
   const playerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (!playing) return;
-    const timer = window.setInterval(() => {
-      setElapsed((current) => {
-        if (current >= DURATION - 0.1) {
-          setPlaying(false);
-          return DURATION;
-        }
-        return current + 0.1;
-      });
-    }, 100);
-    return () => window.clearInterval(timer);
+    const video = videoRef.current;
+    if (!video) return;
+    if (playing) {
+      void video.play().catch(() => setPlaying(false));
+    } else {
+      video.pause();
+    }
   }, [playing]);
 
   const togglePlayback = () => {
-    if (elapsed >= DURATION) setElapsed(0);
+    if (elapsed >= DURATION && videoRef.current) videoRef.current.currentTime = 0;
     setPlaying((current) => !current);
   };
 
   const watchFull = () => {
+    if (videoRef.current) videoRef.current.currentTime = 0;
     setElapsed(0);
     setPlaying(true);
+    void playerRef.current?.requestFullscreen?.();
   };
 
   const enterFullscreen = () => {
@@ -81,12 +81,18 @@ function Index() {
         aria-label="Beyond the Horizon trailer"
         className="group relative aspect-video w-full max-w-[1500px] overflow-hidden bg-player-surface shadow-2xl sm:rounded-md"
       >
-        <img
-          src={horizonPoster}
-          alt="An explorer overlooking a mountain valley at sunrise"
-          width={1536}
-          height={864}
-          className={`absolute inset-0 h-full w-full object-cover ${playing ? "trailer-image-playing" : ""}`}
+        <video
+          ref={videoRef}
+          src={trailerAsset.url}
+          poster={horizonPoster}
+          autoPlay
+          muted={muted}
+          playsInline
+          onTimeUpdate={(event) => setElapsed(event.currentTarget.currentTime)}
+          onEnded={() => setPlaying(false)}
+          onClick={togglePlayback}
+          aria-label="Beyond the Horizon video trailer"
+          className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-player-surface/30 via-transparent to-player-surface/95" />
 
@@ -133,7 +139,9 @@ function Index() {
             aria-label="Seek trailer"
             onClick={(event) => {
               const bounds = event.currentTarget.getBoundingClientRect();
-              setElapsed(((event.clientX - bounds.left) / bounds.width) * DURATION);
+              const nextTime = ((event.clientX - bounds.left) / bounds.width) * DURATION;
+              setElapsed(nextTime);
+              if (videoRef.current) videoRef.current.currentTime = nextTime;
             }}
             className="group/track mb-2 flex h-4 w-full cursor-pointer items-center"
           >

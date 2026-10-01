@@ -155,13 +155,3 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .trailer-image-playing {
-    animation: trailer-drift 12s ease-in-out infinite alternate;
-  }
-}
-
-@keyframes trailer-drift {
-  from { transform: scale(1.01) translate3d(0, 0, 0); }
-  to { transform: scale(1.09) translate3d(-1.2%, -0.8%, 0); }
-}
