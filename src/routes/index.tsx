@@ -90,7 +90,7 @@ function Index() {
   return (
     <main className="min-h-screen bg-player-page pb-12 text-foreground sm:px-8 sm:py-10">
       <div className="mx-auto w-full max-w-[1100px]">
-        <section ref={playerRef} aria-label="Kimote official trailer" className="relative aspect-video w-full overflow-hidden bg-player-surface text-player-ink sm:rounded-lg">
+        <section ref={playerRef} aria-label="Kimote official trailer" className="relative aspect-[4/3] w-full overflow-hidden bg-player-surface text-player-ink sm:aspect-video sm:rounded-lg">
           <video
             ref={videoRef}
             src={TRAILER_URL}
