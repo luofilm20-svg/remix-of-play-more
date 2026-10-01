@@ -6,6 +6,7 @@ import {
   ChevronRight,
   Forward,
   ListVideo,
+  Maximize2,
   MessageSquare,
   MoreHorizontal,
   Pause,
@@ -117,15 +118,24 @@ function Index() {
   };
 
   const enterFullscreen = () => {
-    void playerRef.current?.requestFullscreen?.();
+    if (document.fullscreenElement) {
+      void document.exitFullscreen();
+      return;
+    }
+    if (playerRef.current?.requestFullscreen) {
+      void playerRef.current.requestFullscreen();
+      return;
+    }
+    const video = videoRef.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
+    video?.webkitEnterFullscreen?.();
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-player-page p-4 sm:p-8">
+    <main className="flex min-h-screen flex-col items-center justify-start bg-player-page sm:justify-center sm:p-8">
       <section
         ref={playerRef}
         aria-label="Beyond the Horizon trailer"
-        className="group relative aspect-video w-full max-w-[1200px] overflow-hidden rounded-3xl bg-player-surface shadow-2xl"
+        className="relative aspect-video w-full overflow-hidden rounded-none bg-player-surface shadow-2xl sm:max-w-[1200px] sm:rounded-3xl"
       >
         <video
           ref={videoRef}
@@ -157,9 +167,9 @@ function Index() {
               href="https://hassanmageye.com/films/kimote"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-16 items-center gap-3 rounded-full bg-player-brand px-10 text-lg font-semibold text-primary-foreground shadow-2xl transition-transform hover:scale-105 sm:h-[4.5rem] sm:px-12 sm:text-xl"
+              className="inline-flex h-12 items-center gap-2.5 rounded-full bg-player-brand px-7 text-base font-semibold text-primary-foreground shadow-2xl transition-transform hover:scale-105 sm:h-[4.5rem] sm:gap-3 sm:px-12 sm:text-xl"
             >
-              <Play className="size-7 fill-current" aria-hidden="true" />
+              <Play className="size-6 fill-current sm:size-7" aria-hidden="true" />
               Watch full
             </a>
             <Button
@@ -274,8 +284,12 @@ function Index() {
         {/* Bottom controls */}
         <div className="absolute inset-x-0 bottom-0 px-4 pb-3 sm:px-6 sm:pb-4">
           <div className="mb-3 flex items-center justify-between gap-3">
-            <Button variant="playerPill" onClick={watchFull} className="h-10 px-4 text-sm font-medium sm:h-11 sm:px-5">
-              Watch full <ChevronRight aria-hidden="true" />
+            <Button
+              variant="playerPill"
+              onClick={watchFull}
+              className="h-8 gap-1 px-3 text-xs font-medium sm:h-11 sm:gap-1.5 sm:px-5 sm:text-sm"
+            >
+              Watch full <ChevronRight className="size-4 sm:size-5" aria-hidden="true" />
             </Button>
             <Button variant="playerGlass" size="icon" className="size-10 sm:size-11" onClick={() => setShowMore(true)} aria-label="Up next queue">
               <ListVideo />
@@ -339,7 +353,7 @@ function Index() {
                 onClick={enterFullscreen}
                 aria-label="Full screen"
               >
-                <ListVideo />
+                <Maximize2 />
               </Button>
             </div>
           </div>
