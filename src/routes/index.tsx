@@ -11,6 +11,7 @@ import {
   Pause,
   PictureInPicture2,
   Play,
+  RotateCcw,
   Settings,
   SkipBack,
   SkipForward,
@@ -54,6 +55,7 @@ function Index() {
   const [duration, setDuration] = useState(DURATION);
   const [showMore, setShowMore] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [ended, setEnded] = useState(false);
   const playerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
